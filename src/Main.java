@@ -1,15 +1,45 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import shapes.*;
+
+import java.util.InputMismatchException;
+import java.util.Random;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        String[] colors = {"синій", "червоний", "зелений", "жовтий", "фіолетовий", "рожевий",
+                "білий", "чорний", "сірий", "помаранчевий", "коричневий", "бірюзовий",
+                "золотий", "срібний", "малиновий", "лавандовий", "оливковий", "кремовий"};
+        int number;
+        do {
+            System.out.println("Задайте 0 для рандомної генерації або 1 для ручного введення");
+            Scanner input = new Scanner(System.in);
+            try {
+                number = input.nextInt();
+            } catch (InputMismatchException e) {
+                input.nextLine();
+                number = -1;
+            }
+        } while (number != 0 && number != 1);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        Randomizator randomizator = new Randomizator();
+
+        int size;
+        if (number == 1) {
+            do {
+                System.out.println("Задайте кількість фігур");
+                Scanner input = new Scanner(System.in);
+                try {
+                    size = input.nextInt();
+                } catch (InputMismatchException e) {
+                    input.nextLine();
+                    size = -1;
+                }
+            } while (size < 1);
+        } else size = randomizator.randBetween(1, 100);
+
+        randomizator.fillArrayAndPrint(size,  colors);
     }
+
+
+
 }
